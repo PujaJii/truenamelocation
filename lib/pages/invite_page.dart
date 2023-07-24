@@ -17,6 +17,7 @@ class InvitePage extends StatelessWidget {
       );
     }
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Image.asset('assets/images/invite_frndz.png'),

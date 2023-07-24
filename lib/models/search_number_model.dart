@@ -69,21 +69,21 @@ class MyContact {
 }
 
 class TrueCaller {
-  String? fullName;
+  String? name;
   String? mobile;
 
   TrueCaller({
-    this.fullName,
+    this.name,
     this.mobile,
   });
 
   factory TrueCaller.fromJson(Map<String, dynamic> json) => TrueCaller(
-    fullName: json["full_name"],
+    name: json["name"],
     mobile: json["mobile"],
   );
 
   Map<String, dynamic> toJson() => {
-    "full_name": fullName,
+    "name": name,
     "mobile": mobile,
   };
 }

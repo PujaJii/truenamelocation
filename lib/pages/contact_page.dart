@@ -62,6 +62,11 @@ class _ContactsPageState extends State<ContactsPage> {
         name.add(replacedString);
         print('comanames${replacedString}');
       }
+      else if (el.displayName!.contains('"')) {
+        String originalString = el.displayName!;
+        String replacedString = originalString.replaceAll('"', '');
+        name.add(replacedString);
+      }
       else if(el.displayName!.contains('\'')){
         String originalString = el.displayName!;
         String replacedString = originalString.replaceAll('\'', '');
@@ -99,46 +104,46 @@ class _ContactsPageState extends State<ContactsPage> {
            child: CircularProgressIndicator(color: AppColors.themeColor,),) :
         Column(
           children: [
-            const SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: InkWell(
-                onTap: () {
-                  Get.to(() => const SearchPage());
-                },
-                child: Material(
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    //side:  BorderSide(color: AppColors.pattern1, width: 1),
-                  ),
-                  // borderRadius: BorderRadiusGeometry,
-                  child: Container(
-                    height: 45,
-                    decoration:  BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(6)
-                    ),
-                    child: Row(
-                      children:  [
-                        //const SizedBox(width: 15,),
-                        Container(
-                          height: 33,
-                          width: 33,
-                          margin: const EdgeInsets.only(left: 15),
-                          decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(25)),
-                              image: DecorationImage(
-                                  image: AssetImage('assets/images/my_profile.jpg'))),
-                        ),
-                        const Text('    Search numbers, names & more'),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20,),
+            // const SizedBox(height: 20,),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 18),
+            //   child: InkWell(
+            //     onTap: () {
+            //       Get.to(() => const SearchPage());
+            //     },
+            //     child: Material(
+            //       elevation: 2,
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(6),
+            //         //side:  BorderSide(color: AppColors.pattern1, width: 1),
+            //       ),
+            //       // borderRadius: BorderRadiusGeometry,
+            //       child: Container(
+            //         height: 45,
+            //         decoration:  BoxDecoration(
+            //             color: Colors.white,
+            //             borderRadius: BorderRadius.circular(6)
+            //         ),
+            //         child: Row(
+            //           children:  [
+            //             //const SizedBox(width: 15,),
+            //             Container(
+            //               height: 33,
+            //               width: 33,
+            //               margin: const EdgeInsets.only(left: 15),
+            //               decoration: const BoxDecoration(
+            //                   borderRadius: BorderRadius.all(Radius.circular(25)),
+            //                   image: DecorationImage(
+            //                       image: AssetImage('assets/images/my_profile.jpg'))),
+            //             ),
+            //             const Text('    Search numbers, names & more'),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            const SizedBox(height: 10,),
             Text('Total Contacts (${contacts.length.toString()})'),
             Expanded(
 

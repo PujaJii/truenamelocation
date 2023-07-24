@@ -14,7 +14,8 @@ class ProfileUpdateController extends GetxController {
   TextEditingController first_name = TextEditingController();
   TextEditingController last_name = TextEditingController();
   TextEditingController email = TextEditingController();
-
+  TextEditingController birthDate = TextEditingController();
+  TextEditingController gender = TextEditingController();
 
 
   var isLoading = false.obs;
@@ -29,11 +30,11 @@ class ProfileUpdateController extends GetxController {
     isLoading(true);
     var _api_response = await ProfileUpdateApi.updateProfile(
       box.read('id').toString(),
-        first_name.text,
-        last_name.text,
-        email.text,
-      '',
-      '',
+      first_name.text,
+      last_name.text,
+      email.text,
+      birthDate.text,
+      gender.text,
       box.read('mobile').toString(),
     );
 
@@ -43,7 +44,7 @@ class ProfileUpdateController extends GetxController {
         // loginList.assignAll(_api_response.userData!);
         //box.write('OTP', _api_response.otp);
         box.write('isRegistered', true);
-        Get.off(()=> const BottomNavPage());
+        Get.offAll(()=> const BottomNavPage());
         //print(loginList);
         MySnackbar.successSnackBar('Success','Your details updated successfully!');
       }

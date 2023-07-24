@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:get/get.dart';
+import 'package:truenamelocation/pages/search_page.dart';
+import 'package:truenamelocation/pages/test_paginate_calls.dart';
 import '../pages/invite_page.dart';
 import '../controller/call_status_controller.dart';
 import '../pages/profile.dart';
@@ -31,7 +33,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
   // var deviceId;
   final List<Widget> _screens =
   [
-    const CallHistory(),
+    const TestPaginateCalls(),
     const MessagesPage(),
     const ContactsPage(),
     const InvitePage(),
@@ -54,7 +56,6 @@ class _BottomNavPageState extends State<BottomNavPage> {
   @override
   void initState() {
     getCallStatus();
-    //getFcm();
     super.initState();
   }
   //int initValue = 0;
@@ -70,6 +71,49 @@ class _BottomNavPageState extends State<BottomNavPage> {
     return Scaffold(
       extendBody: true,
       backgroundColor: Colors.white,
+       appBar:  _currentIndex == 4 ?null:
+       AppBar(
+         elevation: 0,
+         backgroundColor: Colors.transparent,
+         title: Padding(
+         padding: const EdgeInsets.symmetric(horizontal: 5),
+         child: InkWell(
+          onTap: () {
+            Get.to(() => const SearchPage());
+          },
+          child: Material(
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6),
+              //side:  BorderSide(color: AppColors.pattern1, width: 1),
+            ),
+            // borderRadius: BorderRadiusGeometry,
+            child: Container(
+              height: 45,
+              decoration:  BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(6)
+              ),
+              child: Row(
+                children:  [
+                  //const SizedBox(width: 15,),
+                  Container(
+                    height: 33,
+                    width: 33,
+                    margin: const EdgeInsets.only(left: 15),
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/my_profile.jpg'))),
+                  ),
+                  const Text('    Search numbers, names & more'),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+       ),
       body: IndexedStack(
         index: _currentIndex,
         children: _screens,
@@ -86,7 +130,6 @@ class _BottomNavPageState extends State<BottomNavPage> {
       unSelectedColor: const Color(0xffacacac),
       elevation: 10,
       backgroundColor: Colors.white,
-
       items: [
         CustomNavigationBarItem(
           icon: const Icon(Icons.call_outlined),

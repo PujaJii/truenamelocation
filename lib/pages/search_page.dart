@@ -60,7 +60,7 @@ class SearchPage extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     );
                   } else {
-                    return controller.listMyContact.isNotEmpty || controller.listTrueResult.isNotEmpty?
+                    return controller.listMyContact.isNotEmpty?
                     Column(
                       children: [
                         SizedBox(height: 10,),
@@ -89,7 +89,7 @@ class SearchPage extends StatelessWidget {
                                         color: AppColors.colors[index % AppColors.colors.length],
                                       ),
                                       child:  Center(
-                                          child: Text(controller.list[0].myContact![index].name.toString().substring(1,2),
+                                          child: Text(controller.list[0].myContact![index].name.toString().substring(0,1),
                                               style: TextStyle(
                                                   color: AppColors.colors2[index % AppColors.colors2.length], fontSize: 20)))),
                                   title: Text(controller.list[0].myContact![index].name.toString()),
@@ -131,6 +131,47 @@ class SearchPage extends StatelessWidget {
                         //       },
                         //     )
                         // ),
+                      ],
+                    ):
+                    controller.listTrueResult.isNotEmpty?
+                    Column(
+                      children: [
+                        SizedBox(height: 10,),
+                        Divider(),
+                        Row(
+                          children: [
+                            SizedBox(width: 20,),
+                            Text('Global search', style: TextStyle( fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                        SizedBox(height: 10,),
+                        Expanded(
+                            child: ListView.builder(
+                              itemCount: searchNumberController.list[0].trueCaller!.length
+                              //     <3?
+                              // searchNumberController.list[0].myContact!.length : 3
+                              ,
+                              itemBuilder: (context, index) {
+                                //print('list of myContact${searchNumberController.listMyContact.length}');
+                                return ListTile(
+                                  leading: Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(25),
+                                        color: AppColors.colors[index % AppColors.colors.length],
+                                      ),
+                                      child:  Center(
+                                          child: Text(controller.list[0].trueCaller![index].name.toString().substring(0,1),
+                                              style: TextStyle(
+                                                  color: AppColors.colors2[index % AppColors.colors2.length], fontSize: 20)))),
+                                  title: Text(controller.list[0].trueCaller![index].name.toString()),
+                                  subtitle: Text(controller.list[0].trueCaller![index].mobile.toString()),
+                                );
+                              },
+                            )
+                        ),
+
                       ],
                     ):
                     searchNumberController.list[0].hasAnotherContact.toString() == 'yes'?

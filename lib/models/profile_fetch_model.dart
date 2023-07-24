@@ -10,7 +10,7 @@ String profileFetchModelToJson(ProfileFetchModel data) => json.encode(data.toJso
 
 class ProfileFetchModel {
   int? status;
-  ProfileData? data;
+  List<ProfileData>? data;
 
   ProfileFetchModel({
     this.status,
@@ -19,59 +19,63 @@ class ProfileFetchModel {
 
   factory ProfileFetchModel.fromJson(Map<String, dynamic> json) => ProfileFetchModel(
     status: json["status"],
-    data: json["data"] == null ? null : ProfileData.fromJson(json["data"]),
+    data: json["data"] == null ? [] : List<ProfileData>.from(json["data"]!.map((x) => ProfileData.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
-    "data": data?.toJson(),
+    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
   };
 }
 
 class ProfileData {
   int? id;
+  String? fullName;
   String? firstName;
   String? lastName;
   String? email;
   String? mobile;
-  dynamic emailVerifiedAt;
-  int? account;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  String? photo;
+  dynamic birthdate;
+  dynamic gender;
+  dynamic callerStatus;
 
   ProfileData({
     this.id,
+    this.fullName,
     this.firstName,
     this.lastName,
     this.email,
     this.mobile,
-    this.emailVerifiedAt,
-    this.account,
-    this.createdAt,
-    this.updatedAt,
+    this.photo,
+    this.birthdate,
+    this.gender,
+    this.callerStatus,
   });
 
   factory ProfileData.fromJson(Map<String, dynamic> json) => ProfileData(
     id: json["id"],
+    fullName: json["full_name"],
     firstName: json["first_name"],
     lastName: json["last_name"],
     email: json["email"],
     mobile: json["mobile"],
-    emailVerifiedAt: json["email_verified_at"],
-    account: json["account"],
-    createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
-    updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
+    photo: json["photo"],
+    birthdate: json["birthdate"],
+    gender: json["gender"],
+    callerStatus: json["caller_status"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
+    "full_name": fullName,
     "first_name": firstName,
     "last_name": lastName,
     "email": email,
     "mobile": mobile,
-    "email_verified_at": emailVerifiedAt,
-    "account": account,
-    "created_at": createdAt?.toIso8601String(),
-    "updated_at": updatedAt?.toIso8601String(),
+    "photo": photo,
+    "birthdate": birthdate,
+    "gender": gender,
+    "caller_status": callerStatus,
   };
 }

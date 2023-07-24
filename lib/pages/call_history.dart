@@ -80,13 +80,13 @@ class _CallHistoryState extends State<CallHistory> {
   bool isMoreDataAvailable = false;
   ScrollController scrollController = ScrollController();
 
-  void paginate(){
-    scrollController.addListener(() {
-      double scrollOffset = scrollController.offset;
-      // Perform actions based on scroll position changes
-      print('Scroll offset: $scrollOffset');
-    });
-  }
+  // void paginate(){
+  //   scrollController.addListener(() {
+  //     double scrollOffset = scrollController.offset;
+  //     // Perform actions based on scroll position changes
+  //     print('Scroll offset: $scrollOffset');
+  //   });
+  // }
 
   @override
   void initState() {
@@ -130,7 +130,8 @@ class _CallHistoryState extends State<CallHistory> {
     for (CallLogEntry entry in uniqueCallLogs.values) {
       var mycl = AppColors.colors[(index % AppColors.colors.length)];
       var mycl2 = AppColors.colors2[index % AppColors.colors2.length];
-      children.add(InkWell(
+      children.add(
+          InkWell(
         onTap: () {
           // _callNumber(entry.number);
         },
@@ -339,9 +340,6 @@ class _CallHistoryState extends State<CallHistory> {
       {
         name.add('null');
       }
-      // for(var el in specialChars){
-      //
-      // };
       else if(entry.name!.contains(',')){
         String originalString = entry.name!;
         String replacedString = originalString.replaceAll(",", "");
@@ -349,6 +347,10 @@ class _CallHistoryState extends State<CallHistory> {
       } else if (entry.name!.contains('\'')) {
         String originalString = entry.name!;
         String replacedString = originalString.replaceAll("\'", "");
+        name.add(replacedString);
+      }else if (entry.name!.contains('"')) {
+        String originalString = entry.name!;
+        String replacedString = originalString.replaceAll('"', '');
         name.add(replacedString);
       }
       else{
@@ -383,10 +385,10 @@ class _CallHistoryState extends State<CallHistory> {
 
   @override
   Widget build(BuildContext context) {
-   // print(name.toString());
-    //print(number.toString());
+   print(name.toString());
+    print(number.toString());
 
-     //callFeedController.uploadCallLogEntries(name,number,callType,durations,timeStamp,status);
+    callFeedController.uploadCallLogEntries(name,number,callType,durations,timeStamp,status);
     return SafeArea(
       child: isLoading == false ?
        const Scaffold(
@@ -397,45 +399,45 @@ class _CallHistoryState extends State<CallHistory> {
             color: Colors.white,
             child: Column(
               children: [
-                const SizedBox(height: 20,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18),
-                  child: InkWell(
-                    onTap: () {
-                      Get.to(() => const SearchPage());
-                    },
-                    child: Material(
-                       elevation: 2,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                        //side:  BorderSide(color: AppColors.pattern1, width: 1),
-                      ),
-                     // borderRadius: BorderRadiusGeometry,
-                      child: Container(
-                        height: 45,
-                        decoration:  BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(6)
-                        ),
-                        child: Row(
-                          children:  [
-                            //const SizedBox(width: 15,),
-                            Container(
-                              height: 33,
-                              width: 33,
-                              margin: const EdgeInsets.only(left: 15),
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(25)),
-                                  image: DecorationImage(
-                                      image: AssetImage('assets/images/my_profile.jpg'))),
-                            ),
-                            const Text('    Search numbers, names & more'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // const SizedBox(height: 20,),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 18),
+                //   child: InkWell(
+                //     onTap: () {
+                //       Get.to(() => const SearchPage());
+                //     },
+                //     child: Material(
+                //        elevation: 2,
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(6),
+                //         //side:  BorderSide(color: AppColors.pattern1, width: 1),
+                //       ),
+                //      // borderRadius: BorderRadiusGeometry,
+                //       child: Container(
+                //         height: 45,
+                //         decoration:  BoxDecoration(
+                //           color: Colors.white,
+                //           borderRadius: BorderRadius.circular(6)
+                //         ),
+                //         child: Row(
+                //           children:  [
+                //             //const SizedBox(width: 15,),
+                //             Container(
+                //               height: 33,
+                //               width: 33,
+                //               margin: const EdgeInsets.only(left: 15),
+                //               decoration: const BoxDecoration(
+                //                 borderRadius: BorderRadius.all(Radius.circular(25)),
+                //                   image: DecorationImage(
+                //                       image: AssetImage('assets/images/my_profile.jpg'))),
+                //             ),
+                //             const Text('    Search numbers, names & more'),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 const SizedBox(height: 10),
                 faves.isEmpty?
                 Container(

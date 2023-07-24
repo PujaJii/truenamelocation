@@ -94,7 +94,7 @@ class _UserProfileState extends State<UserProfile> {
                     children: [
                       Container(
                         height: 145,
-                        color: Colors.teal,),
+                        color: widget.color,),
                       Center(
                         child: Container(
                           height: 80,
@@ -129,13 +129,10 @@ class _UserProfileState extends State<UserProfile> {
                           ),
                         ),
                       ),
-
-
                     ],
                   )
               ),
             ),
-
           ];
         },
         body: Container(
