@@ -8,7 +8,6 @@ import '../pages/complete_profile.dart';
 
 import '../pages/settings_page.dart';
 import '../styles/app_colors.dart';
-import 'location_full_view.dart';
 
 
 
@@ -25,10 +24,6 @@ class _ProfileState extends State<Profile> {
   GoogleMapController? _mapController;
   ProfileFetchController profileUpdateController = Get.put(ProfileFetchController());
   final box = GetStorage();
-  //bool location = false;
-
-
-
   @override
   Widget build(BuildContext context) {
 

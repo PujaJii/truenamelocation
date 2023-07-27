@@ -7,10 +7,8 @@ import '../pages/invite_page.dart';
 import '../controller/call_status_controller.dart';
 import '../pages/profile.dart';
 import 'package:telephony/telephony.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../styles/app_colors.dart';
-import 'call_history.dart';
 import 'contact_page.dart';
 import 'messages_page.dart';
 

@@ -77,8 +77,6 @@ class _SplashScreenState extends State<SplashScreen> {
           Get.off(()=> const IntroPage());
         }
       }
-
-
     });
     super.initState();
     SystemChrome.setPreferredOrientations([

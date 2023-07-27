@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:get/get.dart';
 import '../controller/call_feed_controller.dart';
-import '../pages/search_page.dart';
 
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';

@@ -4,7 +4,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:truenamelocation/apis/calls_paginate_api.dart';
 
 import '../models/calls_paginate_model.dart';
-import '../styles/common_module/my_snack_bar.dart';
 
 
 
@@ -69,12 +68,12 @@ class CallsPaginateController extends GetxController{
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
-        print('Reachmax extend $page');
+        print('ReachMax extend $page');
         if (apiCallLogs.length >= page) {
-          print('listlent : ${apiCallLogs.length}');
+          print('listLent : ${apiCallLogs.length}');
           page += 15;
         } else {
-          print('No data.../.,.xc,vc,gv,fg;dsf;g');
+          print('No data...................');
         }
         getMyCallLogsPagination(number: page);
       }

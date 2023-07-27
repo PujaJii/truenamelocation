@@ -2,7 +2,6 @@ import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/contact_upload_controller.dart';
-import '../pages/search_page.dart';
 import '../pages/user_profile.dart';
 
 import '../styles/app_colors.dart';

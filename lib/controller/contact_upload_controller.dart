@@ -26,7 +26,6 @@ class ContactUploadController extends GetxController{
 
       final batchData =
       {
-        // 'number': entry.number,
         "user_id": box.read('id').toString(),
         "name": stringNames.toString(),
         "mobile": stringANumbers.toString(),

@@ -5,7 +5,6 @@ import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
 
 import '../controller/otp_controller.dart';
-import '../styles/app_colors.dart';
 
 
 
@@ -17,7 +16,7 @@ class VerifyOTP extends StatelessWidget {
    // final _formKey = GlobalKey<FormState>();
     OTPController otpController = Get.find();
 
-    return   Scaffold(
+    return Scaffold(
       body: Column(
         // crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -40,7 +39,6 @@ class VerifyOTP extends StatelessWidget {
                 length: 4,
                 width: MediaQuery.of(context).size.width,
                 fieldWidth: 50,
-
                 style: const TextStyle(
                     fontSize: 17
                 ),

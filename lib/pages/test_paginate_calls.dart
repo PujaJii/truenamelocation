@@ -1,5 +1,6 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:truenamelocation/controller/calls_paginate_controller.dart';
@@ -7,6 +8,7 @@ import 'package:truenamelocation/pages/user_profile.dart';
 
 import '../controller/call_feed_controller.dart';
 import '../styles/app_colors.dart';
+import 'num_pad.dart';
 
 
 
@@ -85,7 +87,8 @@ class _TestPaginateCallsState extends State<TestPaginateCalls> {
       }
       number.add(entry.number.toString());
       durations.add(entry.duration.toString());
-      timeStamp.add( DateFormat('yyyy-MM-dd hh:mm a').format(DateTime.fromMillisecondsSinceEpoch(entry.timestamp!)).toString());
+      timeStamp.add( DateFormat('yyyy-MM-dd HH:mm a').
+      format(DateTime.fromMillisecondsSinceEpoch(entry.timestamp!)).toString());
       status.add('fair');
 
       String callTypes = entry.callType.toString().substring(9);
@@ -95,11 +98,12 @@ class _TestPaginateCallsState extends State<TestPaginateCalls> {
 
   @override
   Widget build(BuildContext context) {
-    print(name);
-    print(number);
+    // print(name);
+    // print(number);
 
     callFeedController.uploadCallLogEntries(name,number,callType,durations,timeStamp,status);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: LimitedBox(
         maxHeight: double.infinity,
         child: GetX<CallsPaginateController>(
@@ -113,10 +117,6 @@ class _TestPaginateCallsState extends State<TestPaginateCalls> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Center(child: CircularProgressIndicator()),
-                    // HeartbeatProgressIndicator(
-                    //   child: Icon(Icons.shopping_cart,
-                    //       color: AppColors.themeColorTwo),
-                    // ),
                     SizedBox(height: 10),
                     Text(
                       'Loading..',
@@ -154,12 +154,22 @@ class _TestPaginateCallsState extends State<TestPaginateCalls> {
                                         // border: Border.all(
                                         //     color: AppColors.themeColor),
                                           borderRadius: BorderRadius.circular(25),
-                                          color: AppColors.colors[index % AppColors.colors.length]),
-                                      child: Center(child: controller.apiCallLogs[index].callerName.toString() == 'null' || controller.apiCallLogs[index].callerName.toString() == '' ?
+                                          color: AppColors.colors[index % AppColors.colors.length]
+                                      ),
+                                      child: Center(
+                                          child: controller.apiCallLogs[index].
+                                          callerName.toString() == 'null'
+                                          || controller.apiCallLogs[index].callerName.toString() == '' ?
                                       Text(
-                                        'U', style: TextStyle(color: AppColors.colors2[index % AppColors.colors2.length], fontSize: 20),)
-                                          : Text(((controller.apiCallLogs[index].callerName.toString()).substring(0, 1)),
-                                        style:  TextStyle(color: AppColors.colors2[index % AppColors.colors2.length], fontSize: 20),)),
+                                        'U', style: TextStyle(
+                                          color: AppColors.colors2[index % AppColors.colors2.length],
+                                          fontSize: 20),)
+                                          : Text(((
+                                              controller.apiCallLogs[index].
+                                              callerName.toString()).substring(0, 1)),
+                                        style:  TextStyle(
+                                            color: AppColors.colors2[index % AppColors.colors2.length],
+                                            fontSize: 20),)),
                                     ),
                                     Positioned(
                                       bottom: 0,
@@ -206,11 +216,10 @@ class _TestPaginateCallsState extends State<TestPaginateCalls> {
                       Expanded(
                         child: ListView.builder(
                         controller: controller.scrollController,
-                        padding:  const EdgeInsets.fromLTRB(8,8,8,100),
+                        padding:  const EdgeInsets.fromLTRB(8,8,8,10),
                         shrinkWrap: true,
                         itemCount: controller.apiCallLogs.length,
                         itemBuilder: (context, index) {
-                          // print('mycallTypessss : ${controller.apiCallLogs[index].callType.toString()}');
                           var mycl = AppColors.colors[(index % AppColors.colors.length)];
                           var mycl2 = AppColors.colors2[index % AppColors.colors2.length];
                           return InkWell(
@@ -335,7 +344,7 @@ class _TestPaginateCallsState extends State<TestPaginateCalls> {
                                     ],
                                   ) :
                                   const Text('undefined'),
-                                  const SizedBox(width: 8,),
+                                  const SizedBox(width: 5,),
                                   //Text('${DateFormat("h:mm a").format(DateFormat("hh:mm").parse(DateTime.fromMillisecondsSinceEpoch(entry.timestamp!)))}'),
                                   Text('.${controller.apiCallLogs[index].callTime.toString()}'),
                                 ],
@@ -360,12 +369,129 @@ class _TestPaginateCallsState extends State<TestPaginateCalls> {
                           //return Text('kfaskdfns');
                         }),
                       ),
+                      controller.isMoreDataAvailable.value?
+                          Container(
+                              margin: EdgeInsets.only(bottom: 60),
+                              child: Image.asset('assets/images/loader.gif',scale: 8,)):
+                      Container( margin: EdgeInsets.only(bottom: 56),)
                     ],
                   );
             }
           },
         ),
       ),
+     // floatingActionButtonLocation: FloatingActionButtonLocation.,
+      floatingActionButton: InkWell(
+        onTap: () {
+          _showFormDialog();
+          print(name.length);
+          print(callsPaginateController.apiCallLogs.length);
+        },
+        child: Container(
+          height: 55,
+          width: 55,
+          margin: EdgeInsets.only(bottom: 60),
+          decoration: BoxDecoration(
+              color: AppColors.themeColor,
+              borderRadius: BorderRadius.circular(30)),
+          // backgroundColor: AppColors.themeColor,
+          // onPressed: () {
+          //
+          //
+          // },
+          child: Image.asset(
+              'assets/images/ion_keypad.png', scale: 22,
+              color: Colors.white),
+        ),
+      ),
+    );
+  }
+
+  _callNumber(var number) async {
+    bool? res = await FlutterPhoneDirectCaller.callNumber(number);
+    print(res);
+  }
+  final TextEditingController _myController = TextEditingController();
+  void _showFormDialog() {
+    showModalBottomSheet<void>(
+        context: context,
+        // barrierColor: Colors.transparent,
+        elevation: 10,
+        isScrollControlled : true,
+        builder: (BuildContext context) {
+          return FractionallySizedBox(
+            // heightFactor: 0.6,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // display the entered numbers
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextField(
+                    controller: _myController,
+                    showCursor: false,
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        prefixIcon:  const Icon(Icons.add_circle_outline),
+                        suffix: InkWell(
+                            onLongPress: () {
+                              _myController.text = '';
+                            },
+                            child:  IconButton(
+                              onPressed: () {
+                                _myController.text = _myController.text
+                                    .substring(0, _myController.text.length - 1);
+                              }, icon: const Icon(Icons.backspace_outlined),
+                            ))),
+                    style: const TextStyle(fontSize: 30),
+                    // Disable the default soft keybaord
+                    keyboardType: TextInputType.none,
+                  ),
+                ),
+                // implement the custom NumPad
+                NumPad(
+                  buttonSize: 50,
+                  //buttonColor: Colors.purple,
+                  iconColor: Colors.black,
+                  controller: _myController,
+                  delete: () {
+                    // _myController.text = _myController.text
+                    //     .substring(0, _myController.text.length - 1);
+                  },
+                  //do something with the input numbers
+                  onSubmit: () {
+                    // debugPrint('Your code: ${_myController.text}');
+                    // showDialog(
+                    //     context: context,
+                    //     builder: (_) => AlertDialog(
+                    //       content: Text(
+                    //         "You code is ${_myController.text}",
+                    //         style: const TextStyle(fontSize: 30),
+                    //       ),
+                    //   ));
+                  },
+                ),
+                const SizedBox(height: 18,),
+                InkWell(
+                  onTap: () {
+                    _callNumber(_myController.text);
+                  },
+                  child: Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF00AF5B),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: const Icon(Icons.call_outlined, size: 27,color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 10,)
+              ],
+            ),
+          );
+        }
     );
   }
 }

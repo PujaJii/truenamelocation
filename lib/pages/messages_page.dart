@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:telephony/telephony.dart';
 import '../pages/message_open.dart';
-import '../pages/search_page.dart';
 
 import '../styles/app_colors.dart';
 
@@ -144,6 +143,15 @@ class _MessagesPageState extends State<MessagesPage> {
       }
       _messages = uniqueMessages.values.toList();
     });
+    // List<SmsMessage> messagesfilter = await telephony.getInboxSms(
+    //     columns: [SmsColumn.ADDRESS, SmsColumn.BODY],
+    //     filter: SmsFilter.where(SmsColumn.ADDRESS)
+    //         .equals("1234567890")
+    //         .and(SmsColumn.BODY)
+    //         .like("starwars"),
+    //     sortOrder: [OrderBy(SmsColumn.ADDRESS, sort: Sort.ASC),
+    //       OrderBy(SmsColumn.BODY)]
+    // );
   }
   
   @override
@@ -213,7 +221,6 @@ class _MessagesPageState extends State<MessagesPage> {
             //     ),
             //   ),
             // ),
-
              const SizedBox(height: 10,),
             Text('Total Messages (${_messages.length.toString()})'),
             Expanded(

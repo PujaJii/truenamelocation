@@ -2,6 +2,7 @@ import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
+// import 'package:url_launcher/url_launcher.dart';
 import '../pages/view_all.dart';
 import 'package:intl/intl.dart';
 
@@ -55,6 +56,28 @@ class _UserProfileState extends State<UserProfile> {
       entry.add(eachCalls);
     }
   }
+// String url = "https://wa.me/$phoneNumber?text=${Uri.encodeComponent(message)}";
+//   void checkWhatsApp() async {
+//     final url = "https://wa.me/${widget.number}";
+//     if (await canLaunch(url)) {
+//       await launch(url);
+//     } else {
+//       // Handle the case where WhatsApp is not installed or the URL is invalid
+//       showDialog(
+//         context: context,
+//         builder: (context) => AlertDialog(
+//           title: Text("WhatsApp Not Found"),
+//           content: Text("WhatsApp is not installed on your device or the number is not registered on WhatsApp."),
+//           actions: [
+//             TextButton(
+//               onPressed: () => Navigator.of(context).pop(),
+//               child: Text("OK"),
+//             ),
+//           ],
+//         ),
+//       );
+//     }
+//   }
   @override
   Widget build(BuildContext context) {
     //print(color);
@@ -75,7 +98,6 @@ class _UserProfileState extends State<UserProfile> {
                   child: const Icon(
                     Icons.arrow_back_outlined,
                     color: Colors.black,)),
-
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   collapseMode: CollapseMode.parallax,
@@ -159,7 +181,7 @@ class _UserProfileState extends State<UserProfile> {
                             border: Border.all(color: Colors.grey[300]!),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const Icon(Icons.call,color: Colors.green),
+                          child: const Icon(Icons.call,color:  AppColors.themeColor),
                         ),
                       ),
                       const Text('Call'),
@@ -176,7 +198,7 @@ class _UserProfileState extends State<UserProfile> {
                           borderRadius: BorderRadius.circular(8),
 
                         ),
-                        child: const Icon(Icons.chat,color: Colors.green),
+                        child: const Icon(Icons.chat,color: AppColors.themeColor),
                       ),
                       const Text('Message'),
                     ],
@@ -191,7 +213,7 @@ class _UserProfileState extends State<UserProfile> {
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(color: Colors.grey[300]!),
                         ),
-                        child: const Icon(Icons.report,color: Colors.green),
+                        child: const Icon(Icons.report,color:  AppColors.themeColor),
                       ),
                       const Text('Spam'),
                     ],
@@ -206,7 +228,7 @@ class _UserProfileState extends State<UserProfile> {
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(color: Colors.grey[300]!),
                         ),
-                        child: const Icon(Icons.block,color: Colors.green),
+                        child: const Icon(Icons.block,color:  AppColors.themeColor),
                       ),
                       const Text('Block'),
                     ],
@@ -241,14 +263,19 @@ class _UserProfileState extends State<UserProfile> {
                       ],
                     ),
                     Divider(color: Colors.grey[300],),
-                    Row(
-                      children: [
-                        SizedBox(
-                            height: 30,
-                            width: 30,
-                            child: Image.asset('assets/images/whtsapp_ab.png',)),
-                        const Text('     WhatsApp')
-                      ],
+                    InkWell(
+                      onTap: () {
+                        //checkWhatsApp();
+                      },
+                      child: Row(
+                        children: [
+                          SizedBox(
+                              height: 30,
+                              width: 30,
+                              child: Image.asset('assets/images/whtsapp_ab.png',)),
+                          const Text('     WhatsApp')
+                        ],
+                      ),
                     ),
                     Divider(color: Colors.grey[300],),
                     Row(
@@ -343,7 +370,7 @@ class _UserProfileState extends State<UserProfile> {
                        },
                        child: const SizedBox(
                          height: 40,
-                         child: Center(child:  Text('View All',style: TextStyle(color: Colors.green,fontSize: 16))),
+                         child: Center(child:  Text('View All',style: TextStyle(color:  AppColors.themeColor,fontSize: 16))),
                        ),
                      ),
                    ],

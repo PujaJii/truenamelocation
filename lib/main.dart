@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:global_configuration/global_configuration.dart';
 import '../pages/splash_screen.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //WidgetsFlutterBinding.ensureInitialized();
