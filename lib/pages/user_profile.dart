@@ -2,7 +2,7 @@ import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
-// import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../pages/view_all.dart';
 import 'package:intl/intl.dart';
 
@@ -56,31 +56,30 @@ class _UserProfileState extends State<UserProfile> {
       entry.add(eachCalls);
     }
   }
-// String url = "https://wa.me/$phoneNumber?text=${Uri.encodeComponent(message)}";
-//   void checkWhatsApp() async {
-//     final url = "https://wa.me/${widget.number}";
-//     if (await canLaunch(url)) {
-//       await launch(url);
-//     } else {
-//       // Handle the case where WhatsApp is not installed or the URL is invalid
-//       showDialog(
-//         context: context,
-//         builder: (context) => AlertDialog(
-//           title: Text("WhatsApp Not Found"),
-//           content: Text("WhatsApp is not installed on your device or the number is not registered on WhatsApp."),
-//           actions: [
-//             TextButton(
-//               onPressed: () => Navigator.of(context).pop(),
-//               child: Text("OK"),
-//             ),
-//           ],
-//         ),
-//       );
-//     }
-//   }
+//String url = "https://wa.me/$phoneNumber?text=${Uri.encodeComponent(message)}";
+  void checkWhatsApp() async {
+    final url = 'https://wa.me/${widget.number}';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      // Handle the case where WhatsApp is not installed or the URL is invalid
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('WhatsApp Not Found'),
+          content: Text("WhatsApp is not installed on your device or the number is not registered on WhatsApp."),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    //print(color);
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -97,7 +96,8 @@ class _UserProfileState extends State<UserProfile> {
                   },
                   child: const Icon(
                     Icons.arrow_back_outlined,
-                    color: Colors.black,)),
+                    color: Colors.black,)
+              ),
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   collapseMode: CollapseMode.parallax,
@@ -249,14 +249,14 @@ class _UserProfileState extends State<UserProfile> {
                 padding: const EdgeInsets.fromLTRB(20,20,0,20),
                 child: Column(
                   children: [
-                    const Row(
+                     Row(
                       children: [
                         Icon(Icons.location_on_outlined),
                         Text('       West Bengal, India')
                       ],
                     ),
                     Divider(color: Colors.grey[300],),
-                    const Row(
+                     Row(
                       children: [
                         Icon(Icons.mail_outline_sharp),
                         Expanded(child: Text('       username.tnts@gmail.com'))
@@ -265,7 +265,7 @@ class _UserProfileState extends State<UserProfile> {
                     Divider(color: Colors.grey[300],),
                     InkWell(
                       onTap: () {
-                        //checkWhatsApp();
+                        checkWhatsApp();
                       },
                       child: Row(
                         children: [
@@ -317,56 +317,56 @@ class _UserProfileState extends State<UserProfile> {
                               Row(
                                 children: [
                                   entry[index].callType.toString() == 'CallType.incoming' ?
-                                  const Row(
+                                   Row(
                                     children: [
                                       Icon(Icons.call_received, size: 18, color: AppColors.themeColor,),
                                       Text('Received Call'),
                                     ],
                                   ) :
                                   entry[index].callType.toString() == 'CallType.outgoing' ?
-                                  const Row(
+                                   Row(
                                     children: [
                                       Icon(Icons.call_made, size: 18,),
                                       Text('Outgoing Call'),
                                     ],
                                   ) :
                                   entry[index].callType.toString() == 'CallType.missed' ?
-                                  const Row(
+                                   Row(
                                     children: [
                                       Icon(Icons.call_missed, size: 18, color: Colors.red),
                                       Text('Missed Call'),
                                     ],
                                   ) :
                                   entry[index].callType.toString() == 'CallType.blocked' ?
-                                  const Row(
+                                   Row(
                                     children: [
                                       Icon(Icons.block, size: 18, color: Colors.blue),
                                       Text('Blocked Call'),
                                     ],
                                   ) :
                                   entry[index].callType.toString() == 'CallType.rejected' ?
-                                  const Row(
+                                   Row(
                                     children: [
                                       Icon(Icons.call_missed, size: 18, color: Colors.red),
                                       Text('Rejected call'),
                                     ],
-                                  ) :
+                                  ):
                                   const SizedBox(),
                                   const SizedBox(width: 8,),
                                   //Text('${DateFormat("h:mm a").format(DateFormat("hh:mm").parse(DateTime.fromMillisecondsSinceEpoch(entry.timestamp!)))}'),
-                                  Text('.  ${DateFormat('h:mm a').format(DateTime.fromMillisecondsSinceEpoch(entry[index].timestamp!))}'),
+                                  Text('.  ${DateFormat('h:mm a').format(
+                                      DateTime.fromMillisecondsSinceEpoch(
+                                          entry[index].timestamp!))}'),
                                 ],
                               ),
                               Divider(color: Colors.grey[300],),
                             ],
                           );
-                        } ,),
+                        },),
                      ),
                      InkWell(
                        onTap: () {
-                         // if (_formKey.currentState!.validate()) {
                          Get.to(()=> ViewAll(widget.name,widget.number));
-                         // }
                        },
                        child: const SizedBox(
                          height: 40,

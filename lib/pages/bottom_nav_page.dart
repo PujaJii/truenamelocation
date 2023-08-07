@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ import 'package:telephony/telephony.dart';
 import '../styles/app_colors.dart';
 import 'contact_page.dart';
 import 'messages_page.dart';
+import 'no_internet.dart';
 
 
 
@@ -27,6 +29,12 @@ class _BottomNavPageState extends State<BottomNavPage> {
   int _currentIndex = 0;
   Telephony telephony = Telephony.instance;
   CallStatusController callStatusController = Get.put(CallStatusController());
+  final Connectivity _connectivity = Connectivity();
+  ConnectivityResult? connectivityResult;
+
+  getInternet() async {
+    connectivityResult = await _connectivity.checkConnectivity();
+  }
   // late FirebaseMessaging messaging = FirebaseMessaging.instance;
   // var deviceId;
   final List<Widget> _screens =
@@ -52,8 +60,10 @@ class _BottomNavPageState extends State<BottomNavPage> {
   //   });
   // }
   @override
+
   void initState() {
     getCallStatus();
+    getInternet();
     super.initState();
   }
   //int initValue = 0;
@@ -77,7 +87,16 @@ class _BottomNavPageState extends State<BottomNavPage> {
          padding: const EdgeInsets.symmetric(horizontal: 5),
          child: InkWell(
           onTap: () {
-            Get.to(() => const SearchPage());
+            getInternet();
+            print(connectivityResult);
+            if (connectivityResult == ConnectivityResult.none) {
+              print('off net');
+              // I am not connected to a network.
+              Get.offAll(()=> const NoInternet());
+            } else {
+              print('on net');
+              Get.to(() => const SearchPage());
+            }
           },
           child: Material(
             elevation: 2,
@@ -94,7 +113,6 @@ class _BottomNavPageState extends State<BottomNavPage> {
               ),
               child: Row(
                 children:  [
-                  //const SizedBox(width: 15,),
                   Container(
                     height: 33,
                     width: 33,
@@ -102,7 +120,8 @@ class _BottomNavPageState extends State<BottomNavPage> {
                     decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(25)),
                         image: DecorationImage(
-                            image: AssetImage('assets/images/my_profile.jpg'))),
+                            image: AssetImage('assets/images/my_profile.jpg'))
+                    ),
                   ),
                   const Text('    Search numbers, names & more'),
                 ],
@@ -111,7 +130,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
           ),
         ),
       ),
-       ),
+     ),
       body: IndexedStack(
         index: _currentIndex,
         children: _screens,

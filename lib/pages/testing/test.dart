@@ -174,35 +174,35 @@ class _TestCallsState extends State<TestCalls> {
                           subtitle: Row(
                             children: [
                               item.callType.toString() == 'CallType.incoming' ?
-                              const Row(
+                               Row(
                                 children: [
                                   Icon(Icons.call_received, size: 18, color: AppColors.themeColor,),
                                   Text('Received Call'),
                                 ],
                               ) :
                               item.callType.toString() == 'CallType.outgoing' ?
-                              const Row(
+                               Row(
                                 children: [
                                   Icon(Icons.call_made, size: 18,),
                                   Text('Outgoing Call'),
                                 ],
                               ) :
                               item.callType.toString() == 'CallType.missed' ?
-                              const Row(
+                               Row(
                                 children: [
                                   Icon(Icons.call_missed, size: 18, color: Colors.red),
                                   Text('Missed Call'),
                                 ],
                               ) :
                               item.callType.toString() == 'CallType.blocked' ?
-                              const Row(
+                               Row(
                                 children: [
                                   Icon(Icons.block, size: 18, color: Colors.blue),
                                   Text('Blocked Call'),
                                 ],
                               ) :
                               item.callType.toString() == 'CallType.rejected' ?
-                              const Row(
+                               Row(
                                 children: [
                                   Icon(Icons.call_missed, size: 18, color: Colors.red),
                                   Text('Rejected call'),

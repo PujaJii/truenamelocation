@@ -189,7 +189,7 @@ class _CallHistoryState extends State<CallHistory> {
                     decoration: BoxDecoration(
                         color: AppColors.themeColor2,
                         borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
+                        boxShadow: [
                           BoxShadow(
                             color: Colors.grey,
                             blurRadius: 2,
@@ -218,35 +218,35 @@ class _CallHistoryState extends State<CallHistory> {
           subtitle: Row(
             children: [
               entry.callType.toString() == 'CallType.incoming' ?
-              const Row(
+               Row(
                 children: [
                   Icon(Icons.call_received, size: 18, color: AppColors.themeColor,),
                   Text('Received Call'),
                 ],
               ) :
               entry.callType.toString() == 'CallType.outgoing' ?
-              const Row(
+               Row(
                 children: [
                   Icon(Icons.call_made, size: 18,),
                   Text('Outgoing Call'),
                 ],
               ) :
               entry.callType.toString() == 'CallType.missed' ?
-              const Row(
+               Row(
                 children: [
                   Icon(Icons.call_missed, size: 18, color: Colors.red),
                   Text('Missed Call'),
                 ],
               ) :
               entry.callType.toString() == 'CallType.blocked' ?
-              const Row(
+               Row(
                 children: [
                   Icon(Icons.block, size: 18, color: Colors.blue),
                   Text('Blocked Call'),
                 ],
               ) :
               entry.callType.toString() == 'CallType.rejected' ?
-              const Row(
+               Row(
                 children: [
                   Icon(Icons.call_missed, size: 18, color: Colors.red),
                   Text('Rejected call'),
@@ -304,7 +304,7 @@ class _CallHistoryState extends State<CallHistory> {
                   decoration: BoxDecoration(
                       color: AppColors.themeColor2,
                       borderRadius: BorderRadius.circular(10),
-                      boxShadow: const [
+                      boxShadow:  [
                         BoxShadow(
                           color: Colors.grey,
                           blurRadius: 2,
@@ -327,7 +327,7 @@ class _CallHistoryState extends State<CallHistory> {
           ),
           const SizedBox(height: 5,),
           entry.name == null || entry.name == '' ?
-          const Expanded(child: Text('Unknown'))
+           Expanded(child: Text('Unknown'))
               :Expanded(child: Text(
             entry.name!,
             maxLines: 1,

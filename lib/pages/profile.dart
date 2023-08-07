@@ -124,7 +124,7 @@ class _ProfileState extends State<Profile> {
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey[300]!),
                       borderRadius: const BorderRadius.all(Radius.circular(8))),
-                  child: const Column(
+                  child: Column(
                     children: [
                       SizedBox(
                         height: 20,
@@ -237,7 +237,7 @@ class _ProfileState extends State<Profile> {
                   padding: const EdgeInsets.fromLTRB(20, 20, 0, 20),
                   child: Column(
                     children: [
-                      const Row(
+                       Row(
                         children: [
                           Icon(Icons.location_on_outlined,
                               color: AppColors.themeColor),
@@ -247,7 +247,7 @@ class _ProfileState extends State<Profile> {
                       Divider(
                         color: Colors.grey[300],
                       ),
-                      const Row(
+                       Row(
                         children: [
                           Icon(Icons.notifications_none_outlined,
                               color: AppColors.themeColor),
@@ -257,7 +257,7 @@ class _ProfileState extends State<Profile> {
                       Divider(
                         color: Colors.grey[300],
                       ),
-                      const Row(
+                       Row(
                         children: [
                           Icon(Icons.verified_user_outlined,
                               color: AppColors.themeColor),

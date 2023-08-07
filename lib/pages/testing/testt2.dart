@@ -148,35 +148,35 @@ class RealTime extends StatelessWidget {
                     subtitle: Row(
                       children: [
                         entry.callType.toString() == 'CallType.incoming' ?
-                        const Row(
+                         Row(
                           children: [
                             Icon(Icons.call_received, size: 18, color: AppColors.themeColor,),
                             Text('Received Call'),
                           ],
                         ) :
                         entry.callType.toString() == 'CallType.outgoing' ?
-                        const Row(
+                         Row(
                           children: [
                             Icon(Icons.call_made, size: 18,),
                             Text('Outgoing Call'),
                           ],
                         ) :
                         entry.callType.toString() == 'CallType.missed' ?
-                        const Row(
+                         Row(
                           children: [
                             Icon(Icons.call_missed, size: 18, color: Colors.red),
                             Text('Missed Call'),
                           ],
                         ) :
                         entry.callType.toString() == 'CallType.blocked' ?
-                        const Row(
+                         Row(
                           children: [
                             Icon(Icons.block, size: 18, color: Colors.blue),
                             Text('Blocked Call'),
                           ],
                         ) :
                         entry.callType.toString() == 'CallType.rejected' ?
-                        const Row(
+                         Row(
                           children: [
                             Icon(Icons.call_missed, size: 18, color: Colors.red),
                             Text('Rejected call'),

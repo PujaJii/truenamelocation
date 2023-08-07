@@ -174,6 +174,7 @@ class SearchPage extends StatelessWidget {
 
                       ],
                     ):
+                    searchNumberController.list.isNotEmpty?
                     searchNumberController.list[0].hasAnotherContact.toString() == 'yes'?
                     ListTile(
                       leading: Container(
@@ -189,6 +190,15 @@ class SearchPage extends StatelessWidget {
                                       color: AppColors.colors2[1 % AppColors.colors2.length], fontSize: 20)))),
                       title: Text(controller.list[0].anotherContact.toString()),
                       subtitle: Text(number.text),
+                    ):
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 50,),
+                        Container(
+                          child: Image.asset('assets/images/search.png',scale: 5),
+                        ),
+                      ],
                     ):
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,

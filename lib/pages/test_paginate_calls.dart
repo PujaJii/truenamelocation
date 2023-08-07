@@ -87,7 +87,7 @@ class _TestPaginateCallsState extends State<TestPaginateCalls> {
       }
       number.add(entry.number.toString());
       durations.add(entry.duration.toString());
-      timeStamp.add( DateFormat('yyyy-MM-dd HH:mm a').
+      timeStamp.add( DateFormat('yyyy-MM-dd h:mm a').
       format(DateTime.fromMillisecondsSinceEpoch(entry.timestamp!)).toString());
       status.add('fair');
 
@@ -248,11 +248,17 @@ class _TestPaginateCallsState extends State<TestPaginateCalls> {
                                         borderRadius: BorderRadius.circular(25),
                                         color: AppColors.colors[index % AppColors.colors.length],
                                       ),
-                                      child: controller.apiCallLogs[index].callerName.toString() == 'null' || controller.apiCallLogs[index].callerName == ''?
+                                      child: controller.apiCallLogs[index].callerName.toString() == 'null'
+                                          || controller.apiCallLogs[index].callerName == ''?
                                       Center(child: Text(
-                                          'U', style: TextStyle(color : AppColors.colors2[index % AppColors.colors2.length], fontSize: 20))) :
-                                      Center(child: Text(((controller.apiCallLogs[index].callerName!).substring(0, 1)),
-                                          style: TextStyle(color : AppColors.colors2[index % AppColors.colors2.length], fontSize: 20))),
+                                          'U', style: TextStyle(
+                                          color : AppColors.colors2[index % AppColors.colors2.length],
+                                          fontSize: 20))) :
+                                      Center(child: Text(((
+                                          controller.apiCallLogs[index].callerName!).substring(0, 1)),
+                                          style: TextStyle(
+                                              color : AppColors.colors2[index % AppColors.colors2.length],
+                                              fontSize: 20))),
                                     ),
                                     Positioned(
                                       left: 0,
@@ -303,41 +309,51 @@ class _TestPaginateCallsState extends State<TestPaginateCalls> {
                                 ),
                               ),
                               title:
-                              controller.apiCallLogs[index].callerName.toString() == 'null' || controller.apiCallLogs[index].callerName == '' ?
-                              Text(controller.apiCallLogs[index].callFromMobile!,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w400),):
-                              Text(controller.apiCallLogs[index].callerName!, style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w400)),
+                              controller.apiCallLogs[index].callerName.toString() == 'null'
+                                  || controller.apiCallLogs[index].callerName == '' ?
+                              Text(controller.apiCallLogs[index].callFromMobile!,
+                                style: const TextStyle(fontSize: 14,
+                                    fontWeight: FontWeight.w400),):
+                              Text(controller.apiCallLogs[index].callerName!,
+                                  style: const TextStyle(fontSize: 14,
+                                      fontWeight: FontWeight.w400)),
                               subtitle: Row(
                                 children: [
-                                  controller.apiCallLogs[index].callType.toString() == 'CallType.INCOMING' ?
-                                  const Row(
+                                  controller.apiCallLogs[index].callType.toString()
+                                      == 'CallType.INCOMING' ?
+                                   Row(
                                     children: [
                                       Icon(Icons.call_received, size: 18, color: AppColors.themeColor,),
                                       Text('Received'),
                                     ],
                                   ) :
-                                  controller.apiCallLogs[index].callType.toString() == 'CallType.OUTGOING' ?
-                                  const Row(
+                                  controller.apiCallLogs[index].callType.toString()
+                                      == 'CallType.OUTGOING' ?
+                                   Row(
                                     children: [
                                       Icon(Icons.call_made, size: 18,),
                                       Text('Outgoing'),
                                     ],
                                   ) :
-                                  controller.apiCallLogs[index].callType.toString() == 'CallType.MISSED' ?
-                                  const Row(
+                                  controller.apiCallLogs[index].callType.toString()
+                                      == 'CallType.MISSED' ?
+                                   Row(
                                     children: [
                                       Icon(Icons.call_missed, size: 18, color: Colors.red),
                                       Text('Missed'),
                                     ],
                                   ) :
-                                  controller.apiCallLogs[index].callType.toString() == 'CallType.BLOCKED' ?
-                                  const Row(
+                                  controller.apiCallLogs[index].callType.toString()
+                                      == 'CallType.BLOCKED' ?
+                                   Row(
                                     children: [
                                       Icon(Icons.block, size: 18, color: Colors.blue),
                                       Text('Blocked'),
                                     ],
                                   ) :
-                                  controller.apiCallLogs[index].callType.toString() == 'CallType.REJECTED' ?
-                                  const Row(
+                                  controller.apiCallLogs[index].callType.toString()
+                                      == 'CallType.REJECTED' ?
+                                   Row(
                                     children: [
                                       Icon(Icons.call_missed, size: 18, color: Colors.red),
                                       Text('Rejected'),
@@ -345,7 +361,6 @@ class _TestPaginateCallsState extends State<TestPaginateCalls> {
                                   ) :
                                   const Text('undefined'),
                                   const SizedBox(width: 5,),
-                                  //Text('${DateFormat("h:mm a").format(DateFormat("hh:mm").parse(DateTime.fromMillisecondsSinceEpoch(entry.timestamp!)))}'),
                                   Text('.${controller.apiCallLogs[index].callTime.toString()}'),
                                 ],
                               ),
@@ -362,7 +377,8 @@ class _TestPaginateCallsState extends State<TestPaginateCalls> {
                                       decoration: BoxDecoration(
                                           color: AppColors.pattern1,
                                           borderRadius: BorderRadius.circular(30)),
-                                      child: const Icon(Icons.keyboard_arrow_right,size: 17,))),
+                                      child: const Icon(Icons.keyboard_arrow_right,
+                                        size: 17,))),
                             ),
                           );
                           //}

@@ -14,9 +14,7 @@ class ProfileFetchController extends GetxController{
   var latitude = 13.726045.obs;
   var longitude = 65.633425.obs;
   var isLoading = false.obs;
-  //final box = GetStorage();
   var userProfile = <ProfileData>[].obs;
-  // var apiResponse1;
 
   getProfileInfo() async {
     try {

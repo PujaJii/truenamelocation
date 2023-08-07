@@ -23,9 +23,9 @@ class ImageUploadController extends GetxController{
     if(_api_response!=null){
 
       if(_api_response.status == 200){
-        print('call status Updated');
-        Get.to(()=> BottomNavPage());
-        MySnackbar.successSnackBar('Uploaded','Profile image is uploaded');
+        print('Image Updated');
+        //Get.to(()=> BottomNavPage());
+       // MySnackbar.successSnackBar('Uploaded','Profile image is uploaded');
       }
       else if(_api_response.status == 400){
         // Get.back();
